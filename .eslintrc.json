@@ -1,0 +1,42 @@
+{
+  // Extend existing configuration
+  "extends": [
+    "airbnb-base"
+  ],
+  // Enable ES6 support. If you want to use custom Babel
+  // features, you will need to enable a custom parser
+  // as described in a section below. babel-eslint
+  "parser": "",
+  "env": {
+  },
+  // Enable custom plugin
+  "plugins": [
+  ],
+  "globals": {
+    "$": true,
+    "angular": true,
+    "moment": true,
+    "_": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack.dev.js"
+      }
+    }
+  },
+  "rules": {
+    "prefer-template": "off",
+    "no-param-reassign": "off",
+    "comma-dangle": "off",
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "no-shadow": "off",
+    "consistent-return": "off",
+    "strict": "off",
+    "arrow-body-style": ["error", "always"],
+    "no-plusplus": "off",
+    "class-methods-use-this": "off"
+  }
+}

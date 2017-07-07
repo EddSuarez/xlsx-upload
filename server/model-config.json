@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "./models",
+      "./models/openshift",
+      "./models/chargebee"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "./mixins"
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "email": {
+    "dataSource": "emailDs"
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Contents": {
+    "dataSource": "psql",
+    "public": true
+  },
+  "Contentimages": {
+    "dataSource": "psql",
+    "public": true
+  },
+  "Localsuggestions": {
+    "dataSource": "psql",
+    "public": true
+  },
+  "LocalsuggestionsEs": {
+    "dataSource": "psql",
+    "public": true
+  },
+  "container": {
+    "dataSource": "storage",
+    "public": true
+  }
+}

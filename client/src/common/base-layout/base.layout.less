@@ -1,0 +1,600 @@
+@import '~bootstrap/less/variables.less';
+@import  '~bootstrap/less/mixins/vendor-prefixes.less';
+@import  '~angular-toastr/dist/angular-toastr.css';
+@import './animate.less';
+@import './navbar.less';
+
+// ========================================================================
+//   custom-variables
+// ==========================================================================
+
+@green-600: #43A047;
+@green-700: #388E3C;
+@green-main: #65bc45;
+
+@gray-200: #EEEEEE;
+@gray-300: #E0E0E0;
+@gray-400: #BDBDBD;
+@gray-500: #9E9E9E;
+@gray-700: #616161;
+
+@blue-gray-600: #546E7A;
+
+@light-blue-200: #B0BEC5;
+@light-blue-300: #4FC3F7;
+@light-blue-800: #37474F;
+@light-blue-A400: #00B0FF;
+
+@lime-100: #F0F4C3;
+@lime-300: #DCE775;
+@lime-900: #827717;
+
+@purple-500: #9C27B0;
+
+@red-800: #C62828;
+
+@white: #FFF;
+
+
+// ========================================================================
+//   media-queries
+// ==========================================================================
+
+// Taken from bootstrap variables
+// to match all components media queries
+
+@mq-desktop-lg:                           @screen-lg-desktop; // Usually 1200px
+@mq-desktop:                              @screen-desktop;    // Usually 992px
+@mq-tablet:                               @screen-sm-min;     // Usually 768px
+@mq-mobile:                               @screen-phone;      // Usually 480px
+
+@desktop-lg:                              ~"only screen and (min-width: @{mq-desktop-lg})";
+@desktop:                                 ~"only screen and (min-width: @{mq-desktop})";
+@tablet:                                  ~"only screen and (min-width: @{mq-tablet})";
+@mobile:                                  ~"only screen and (min-width: @{mq-mobile})";
+@mobile-s:                                ~"only screen and (max-width: @{mq-mobile})";
+
+
+// Inverse version media queries (for use with max-width)
+// Some components needs to be strictly defined only for mobile
+
+@mq-up-to-desktop-lg:                           (@screen-lg-desktop - 1); // Usually 1199px
+@mq-up-to-desktop:                              (@screen-desktop - 1);    // Usually 991px
+@mq-up-to-tablet:                               (@screen-sm-min - 1);     // Usually 767px
+@mq-up-to-mobile:                               (@screen-phone - 1);      // Usually 479px
+
+@upto-desktop-lg:                              ~"only screen and (max-width: @{mq-up-to-desktop-lg})";
+@upto-desktop:                                 ~"only screen and (max-width: @{mq-up-to-desktop})";
+@upto-tablet:                                  ~"only screen and (max-width: @{mq-up-to-tablet})";
+@upto-mobile:                                  ~"only screen and (max-width: @{mq-up-to-mobile})";
+
+@landscape:                                    ~"(max-device-width: @{mq-tablet}) and (orientation:landscape)";
+
+
+/* ========================================================================
+   Component: layout.less
+ ========================================================================== */
+
+//
+// Main layout
+// This file controls the presentation of all components
+//  .wrapper
+//    > section
+//      > .content-wrapper
+//    > .aside
+//
+// If modified or removed make sure to check the variable
+// shared with other components
+// -------------------------------------------------------------
+
+@aside-wd:                                220px;
+@aside-wd-collapsed:                      70px;
+@aside-bg:                                #fff;
+
+@content-bg:                              #f5f7fa;
+@content-heading-bg:                      #fafbfc;
+@content-heading-border:                  #cfdbe2;
+@content-padding:                         20px;
+
+@footer-hg:                               60px;
+
+@navbar-hg:                               @navbar-height;
+
+@boxed-max-width:                         1140px;
+@z-index-main-section:                    99;
+
+html {
+  // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
+  -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+html, body {
+  height: 100%;
+  background-color: @content-bg !important;
+}
+
+a, a:hover, a:focus {
+  cursor: pointer;
+  outline: 0 !important;
+}
+
+.content-wrapper h3 a {
+    color: #9e9e9e;
+}
+
+.content-wrapper h3 a:hover, .content-wrapper h3 a:focus  {
+    color: #616161;
+    text-decoration: none;
+}
+
+.control-label {
+    color: #bdbdbd;
+    font-weight: normal;
+}
+
+.app-wrapper {
+  height: 100%;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  &.ng-leave {
+    display: none;
+  }
+
+  // Contains the main sidebar
+  > .aside {
+    // visibility: hidden;
+    position: absolute;
+    width: @aside-wd;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: @z-index-main-section + 5;
+    // .transition(visibility 0s linear .3s);
+    .backface-visibility(hidden);
+    background-color: @aside-bg;
+
+    .aside-inner {
+      padding-top: 78px;
+      height: 100%;
+      width: @aside-wd;
+      overflow: hidden;
+      @media @upto-tablet {
+        padding-top: 128px;
+      }
+    }
+
+    > .nav-floating {
+
+      // position: handled from directive
+      left: inherit;
+      margin-left: @aside-wd;
+      z-index: @z-index-main-section * 10;
+
+      min-width: 190px;
+      overflow: auto;
+    }
+
+    .dropdown-backdrop {
+      z-index: -1;
+    }
+  }
+
+  // Contains the main content
+  > section {
+
+    height: 100%;
+    margin-left: 220px;
+    // overflow: hidden;
+    z-index: @z-index-main-section;
+    background-color: @content-bg;
+  //  margin-bottom: @footer-hg !important; // ensure a space for the footer
+    @media @upto-tablet {
+      margin-left:0px;
+    }
+  }
+
+  // Page Footer
+  > footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: @footer-hg;
+    border-top: 1px solid @gray-light;
+    padding: @content-padding;
+    z-index: @z-index-main-section - 2;
+    > p {
+      margin: 0;
+    }
+  }
+}
+
+.well {
+    background-color: #fff !important;
+    border: 1px solid #dde6e9 !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+}
+
+// Aside collapsed layout
+// -------------------------------
+
+// Aside status toggled via JS
+.aside-collapsed {
+  overflow-y: auto;
+  &.wrapper {
+    > .aside {
+      &, > .aside-inner {
+        width: @aside-wd-collapsed;
+      }
+      > .nav-floating {
+        margin-left: @aside-wd-collapsed;
+      }
+    }
+  }
+}
+
+// Margin only exists above tablet
+@media @tablet {
+  // Aside status toggled via JS
+  .aside-collapsed {
+    &.wrapper {
+      > section,
+      > footer {
+        margin-left: @aside-wd-collapsed;
+      }
+    }
+  }
+}
+
+// mixin to remove transformations
+.disable-transform () {
+   -webkit-transform: none;
+   -moz-transform: none;
+   -opera-transform: none;
+   -ms-transform: none;
+   transform: none;
+}
+
+
+.layout-fixed {
+
+  @media (max-width: @boxed-max-width) {
+    &.aside-toggled,
+    &.offsidebar-open {
+      overflow-y: hidden;
+    }
+  }
+
+  .wrapper {
+    .topnavbar-wrapper {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: @z-index-main-section + 10;
+    }
+    > aside {
+      position: fixed;
+    }
+    /* only applied to sidebar */
+    > .aside {
+      /* safari fix */
+      height: 1px;
+      min-height: 100%;
+      /* ios blanks space fix */
+      > .aside-inner {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+      }
+    }
+    > section {
+      margin-top: 78px;
+    }
+  }
+}
+
+@media @upto-tablet {
+
+  .aside-collapsed .wrapper {
+    > .aside {
+      margin-left: -@aside-wd-collapsed;
+    }
+  }
+
+  .aside-collapsed.aside-toggled {
+    .wrapper {
+      > section,
+      > footer {
+        margin-left: @aside-wd-collapsed;
+      }
+
+      > .aside {
+        margin-left: 0;
+      }
+    }
+  }
+
+
+  .csstransforms3d  {
+
+    .aside-collapsed .wrapper {
+        .backface-visibility(hidden);
+        > section,
+        > footer {
+          margin-left: 0;
+          .translate3d(0,0,0);
+          .transition-transform(.3s ease);
+        }
+        > .aside {
+          margin-left: 0;
+          .translate3d(-@aside-wd-collapsed,0,0);
+          .transition-transform(.3s ease);
+
+        }
+    }
+
+    .aside-collapsed.aside-toggled {
+      .wrapper {
+        > section,
+        > footer {
+          .translate3d(@aside-wd-collapsed,0,0);
+        }
+        > .aside {
+          .translate3d(0,0,0);
+        }
+      }
+    }
+
+  }
+
+}
+
+// Page main content
+// -----------------------------
+.content-wrapper {
+  //padding-left: 15px;
+  width: 100%;
+  // styling to visually wrap the component
+  border-top: 1px solid rgba(0,0,0,.15);
+  margin-top: -1px;
+
+  > .unwrap {
+    margin: -15px; // expand over wrapper padding
+    @media @tablet {
+      margin: -20px; // expand over wrapper padding
+    }
+  }
+
+  > h3,
+  > .content-heading {
+    font-size: @font-size-h3;
+    line-height: @headings-line-height;
+    color: #929292;
+    margin-top: 0px !important;
+
+    margin-bottom: 20px;
+    padding: 15px;
+    font-weight: normal;
+    background-color: @content-heading-bg;
+    border-bottom: 1px solid @content-heading-border;
+    > small {
+      display: block;
+      font-size: 12px;
+      color: @text-muted;
+    }
+  }
+  > button, > .btn {
+    margin: 10px 10px 0 0;
+  }
+
+  .container,
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+/*
+  @media @tablet {
+    padding: @content-padding;
+    //overflow: auto; // required for portlets
+    > h3,
+    > .content-heading {
+      margin: -@content-padding;
+      margin-bottom: @content-padding;
+      padding: @content-padding;
+    }
+    > button, > .btn {
+      margin: 0;
+    }
+  }
+  */
+}
+.page-header {
+  border-bottom-color: @gray-light;
+}
+
+.panel {
+  border: 0px;
+  border-radius: 0px;
+  .panel-heading {
+    background-color: #fff !important;
+    border-color: #ddd;
+    color: #333333;
+    border-bottom: 0;
+    font-size: 14px;
+    a {
+      text-decoration: none !important;
+    }
+  }
+  &.panel-default {
+    border-top-width: 3px;
+  }
+}
+
+.well {
+  border: 1px solid @gray;
+}
+
+
+.panel {
+  .panel-heading {
+    padding-bottom: 0;
+  }
+}
+
+.panel {
+  .panel-heading {
+    h4 {
+      border-bottom: 1px solid @gray-300;
+      color: @gray-700;
+      font-family: Roboto, sans-serif;
+      font-size: 20px;
+      margin-bottom: 5px;
+      padding-bottom: 5px;
+    }
+  }
+}
+
+.panel {
+  .panel-heading {
+    h4 {
+      > a {
+        color: @light-blue-300;
+        float: right;
+        font-family: Roboto, sans-serif;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.panel {
+  .panel-body {
+    select {
+      option {
+        padding: 0 16px;
+      }
+    }
+  }
+}
+
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #eee !important;
+}
+
+.dropdown-menu li {
+  cursor: pointer;
+}
+
+/*From home layout*/
+body {
+  font-weight: 300 !important;
+  font-family: 'Arial', sans-serif !important;
+
+  @media @upto-tablet{
+    margin-top: 50px;
+  }
+
+}
+p {
+  font-size: 14px;
+  /* Good font size for reading */
+  line-height: 1.5;
+}
+/* Good line-height for reading */
+h1 {
+  margin: 0;
+  font-size: 60px;
+  line-height: 1;
+}
+h2 {
+  margin: 0;
+  font-size: 40px;
+  line-height: 2;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-bottom: 10.5px !important;
+  margin-top: 21px !important;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+strong {
+  font-weight: 600;
+}
+.fa-34p {
+  font-size: 34px !important;
+}
+.font-black{
+  color: #000 !important;
+}
+
+.form-control {
+  border-radius: 0px !important;
+}
+
+.form-control:focus {
+  border-color: @green-main !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.green-but {
+  text-align: center !important;
+  border-radius: 0px !important;
+  box-shadow: 0 0 9px rgba(255, 255, 255, 0.22) !important;
+  background-color: @green-main !important;
+  color: #ffffff;
+  font-weight: 600 !important;
+  margin: 0 auto;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.green-but:focus {
+  text-decoration: none;
+  background-color: @green-main;
+  color: #ffffff !important;
+}
+
+.green-but:hover {
+  text-decoration: none;
+  color: #ffffff !important;
+  background-color: rgba(120, 190, 32, 0.65) !important;
+}
+
+
+.default-but {
+  border: 1px solid #a6a8ac !important;
+  border-radius: 0px !important;
+  box-shadow: 0 0 9px rgba(255, 255, 255, 0.22) !important;
+  background-color: #fff !important;
+  color: #333;
+  font-weight: 600 !important;
+  margin: 0 auto;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.default-but:focus {
+  text-decoration: none;
+  background-color: #fff;
+  color: #333 !important;
+}
+
+.default-but:hover {
+  text-decoration: none;
+  color: rgba(51, 51, 51, 0.65) !important;
+}

@@ -1,0 +1,32 @@
+pre {
+  background-color: transparent;
+  border: 0px;
+}
+
+pre.pretty-json {
+  outline:0px;
+  padding:0px;
+  margin:5px;
+  border: 0px;
+  background-color: transparent;
+}
+
+pre.pretty-json span.string {
+  color:green;
+}
+
+pre.pretty-json span.number {
+  color:#ff8c00;
+}
+
+pre.pretty-json span.boolean {
+  color:#00f;
+}
+
+pre.pretty-json span.key {
+  color:red;
+}
+
+pre.pretty-json span.sep {
+  color:#000;
+}

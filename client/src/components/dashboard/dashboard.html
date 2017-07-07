@@ -1,0 +1,21 @@
+<div class="content-wrapper">
+    <h3>
+       Curio
+    </h3>
+    <section>
+      <div class="text-center h4 cb-empty-space" ng-show="$ctrl.pageLoading">
+        {{ 'words.LOADING' | translate }}...
+      </div>
+      <div ng-if="!$ctrl.pageLoading">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+              <h5>Dashboard</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>

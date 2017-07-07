@@ -1,0 +1,21 @@
+<div class="aside-inner">
+     <nav sidebar-anyclick-close=""  class="sidebar">
+        <!-- START sidebar nav-->
+        <ul class="nav">
+             <li ng-class="$ctrl.isActive('/dashboard')" ui-route="/dashboard" >
+                <a title="Dashboard"  href="/dashboard"  ng-click="$ctrl.toggleCollapse('dashboard',!$ctrl.collapsed.dashboard)">
+                    <em class="fa fa-home"></em>
+                    <span class="ng-binding">Dashboard</span>
+                </a>
+            </li>
+            <li ng-class="$ctrl.isActive('/upload-file')" ui-route="/upload-file" >
+                <a title="Dashboard"  href="/upload-file"  ng-click="$ctrl.toggleCollapse('upload-file',!$ctrl.collapsed.dashboard)">
+                    <em class="fa fa-file-excel-o"></em>
+                    <span class="ng-binding">Upload xlsx</span>
+                </a>
+            </li>
+        </ul>
+        <!-- END sidebar nav-->
+     </nav>
+</div>
+

@@ -1,0 +1,24 @@
+version: '2.0'
+services:
+  backend:
+    image: bitnami/node
+    command: "sh -c 'NODE_ENV=development npm install && npm run start:dev:api'"
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+    network_mode: bridge
+    env_file: .env
+  frontend:
+    image: bitnami/node
+    command: "sh -c './wait-for-it.sh backend:8080 -- npm run start:dev'"
+    ports:
+      - 8081:8081
+    links:
+      - "backend:backend"
+    volumes_from:
+      - backend
+    depends_on:
+      - backend
+    network_mode: bridge
+    env_file: .env

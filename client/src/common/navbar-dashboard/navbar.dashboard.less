@@ -1,0 +1,127 @@
+@import (reference) "~common/base-layout/base.layout.less";
+
+@nav-header-wd-toggled:         @aside-wd-collapsed;
+
+.navbar {
+    border-width: 0 !important;
+    border-radius: 0px !important;
+
+    &.flip {
+        height: 78px;
+    }
+
+    // Reset default to allow handle via different logo size
+    .navbar-brand {
+      padding: 15px;
+    }
+
+
+    > .navbar-header {
+        position: relative;
+        // overlaps nav-wrapper
+        z-index: 11;
+    }
+
+    >  .nav-wrapper {
+        padding-top: 1px;
+        height: 100%;
+        margin-left: -1px;
+        margin-right: -1px;
+        padding: 0 1px;
+        border: 1px solid;
+        border-top: none;
+        border-color: #e5e5e5;
+        background-color: #fff;
+
+        > .navbar-right {
+            margin: 0px;
+        }
+
+        > .navbar-left {
+            margin:0px;
+        }
+
+        > .navbar-nav > li > a:focus {
+              color: #fff;
+              background-color: none;
+              cursor: pointer;
+        }
+        >  .navbar-nav > li > a.active,
+           .navbar-nav > li > a:hover {
+              color: #575757 !important;
+              cursor: pointer;
+              text-shadow: none;
+            }
+
+        // restore floating props for navbar items
+        .nav.navbar-nav {
+          float: left;
+          &.navbar-right {
+            float: right;
+          }
+        }
+
+        .nav > li {
+            position: static;
+            float: left;
+          }
+
+
+
+
+
+    }
+
+    .navbar-brand.dash-brand-logo-collapsed {
+      > img {
+        margin-left: 6px;
+        margin-top: 1px;
+        padding: 5px;
+        width: 58px;
+      }
+    }
+    .navbar-brand.dash-brand-logo {
+        padding: 15px;
+        > img {
+            margin-left: 18px;
+            margin-right: 24px;
+            margin-top: 7px;
+            padding: 5px;
+            width: 181px;
+        }
+    }
+}
+
+
+
+@media @upto-tablet {
+    .navbar{
+        margin-bottom: 60px !important;
+    }
+    .sidebar-toggle {
+      position: absolute !important;
+      top: 0px;
+      right: 0;
+      z-index: 3001;
+    }
+
+}
+
+@media @tablet {
+  .aside-collapsed {
+    .topnavbar {
+      .navbar-header {
+        .dash-brand-logo { display: none; }
+        .dash-brand-logo-collapsed { display: block !important; }
+      }
+
+      .navbar-header {
+        width: @nav-header-wd-toggled;
+      }
+
+      .navbar-form {
+        left: @nav-header-wd-toggled;
+      }
+    }
+  }
+}

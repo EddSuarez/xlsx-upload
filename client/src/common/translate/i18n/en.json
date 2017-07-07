@@ -1,0 +1,8 @@
+{
+  "dashboard": {
+    "WELCOME": "Welcome to {{appName}}"
+  },
+  "words": {
+    "LOADING": "Loading"
+  }
+}

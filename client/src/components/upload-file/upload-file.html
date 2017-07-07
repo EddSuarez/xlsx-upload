@@ -1,0 +1,64 @@
+<div class="content-wrapper">
+    <h3>
+       Upload xlsx file
+    </h3>
+    <section>
+      <div class="text-center h4 cb-empty-space" ng-show="$ctrl.pageLoading">
+        {{ 'words.LOADING' | translate }}...
+      </div>
+      <div ng-if="!$ctrl.pageLoading">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+              <form>
+                <div class="form-group">
+                  <label for="exampleInputFile">Upload xlsx file</label>
+                  <input id="xlsxInput" type="file"
+                    ngf-select="$ctrl.getSheets($file, $invalidFiles)"
+                    ngf-pattern="'.xlsx'"
+                    ngf-accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    ngf-max-size="1MB" />
+                  <p class="help-block">The file should contain an 'action' column indicating the rquired action (insert, update, delete).<br> If the action is 'insert' the id column will be omitted.</p>
+                  <foo ng-if="$ctrl.errorFile" >
+                    <div class="alert alert-danger">
+                      Invalid file
+                    </div>
+                  </foo>
+                </div>
+
+
+                <div ng-if="$ctrl.sheets" class="form-group">
+                  <label >Sheets</label><br>
+                  <div ng-repeat="sheet in $ctrl.sheets track by $index">
+                    <input type="radio" ng-model="$ctrl.selectedSheet"  ng-value="sheet"> {{sheet}}
+                  </div>
+                </div>
+                <button  ng-click="$ctrl.proccess()" class="btn btn-default">Proccess</button>
+                <br>
+                <br>
+                <foo ng-if="$ctrl.proccessSuccess" >
+                  <div class="alert alert-success">
+                    {{$ctrl.proccessSuccess}}
+                  </div>
+                </foo>
+                <foo ng-if="$ctrl.proccessErrors" >
+                  Please fix the data in the xlsx file and try again.
+
+                  <div ng-repeat="error in $ctrl.proccessErrors track by $index" class="alert alert-danger">
+                    <strong>Errors:</strong><br>
+                    <pre class='json' json='error.errors' pretty-json />
+                    <br>
+                    <strong>In Row:</strong><br>
+                    <pre class='json' json='error.data' pretty-json />
+                  </div>
+                  <br>
+                </foo>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>

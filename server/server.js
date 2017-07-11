@@ -16,6 +16,7 @@ app.get('*', (req, res) => {
 
 app.post('/api/upload/proccessData/:sheet', multer().any(), (req, res) => {
   upload.proccessData(req, res, (err, result) => {
+    console.error(err);
     if (err) res.sendStatus(400);
     res.send(result);
   });

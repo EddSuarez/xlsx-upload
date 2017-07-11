@@ -414,7 +414,7 @@
         "nullable": "YES"
       }
     },
-    "primaryImage": {
+    "primary_image": {
       "type": "String",
       "required": false,
       "length": 100,

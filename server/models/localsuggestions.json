@@ -1,7 +1,7 @@
 {
   "name": "Localsuggestions",
   "options": {
-    "idInjection": false,
+    "idInjection": true,
     "postgresql": {
       "schema": "public",
       "table": "localsuggestions"

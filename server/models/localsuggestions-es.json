@@ -1,7 +1,7 @@
 {
   "name": "LocalsuggestionsEs",
   "options": {
-    "idInjection": false,
+    "idInjection": true,
     "postgresql": {
       "schema": "public",
       "table": "localsuggestions_es"
@@ -72,6 +72,7 @@
     "created": {
       "type": "Date",
       "required": false,
+      "default": "$now",
       "length": null,
       "precision": null,
       "scale": null,

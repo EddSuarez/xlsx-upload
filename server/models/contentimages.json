@@ -1,7 +1,7 @@
 {
   "name": "Contentimages",
   "options": {
-    "idInjection": false,
+    "idInjection": true,
     "postgresql": {
       "schema": "public",
       "table": "contentimages"
@@ -54,7 +54,7 @@
         "nullable": "YES"
       }
     },
-    "imageUrl": {
+    "image_url": {
       "type": "String",
       "required": true,
       "length": 320,

@@ -52,6 +52,18 @@
     "dataSource": "psql",
     "public": true
   },
+  "LocalsInfo": {
+    "dataSource": "psql",
+    "public": true
+  },
+  "LocalsInfoEs": {
+    "dataSource": "psql",
+    "public": true
+  },
+  "Localphotos": {
+    "dataSource": "psql",
+    "public": true
+  },
   "container": {
     "dataSource": "storage",
     "public": true

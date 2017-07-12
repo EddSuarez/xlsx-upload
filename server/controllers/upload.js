@@ -7,7 +7,10 @@ const getModel = (models, table) => {
     contents: models.Contents,
     contentimages: models.Contentimages,
     localsuggestions: models.Localsuggestions,
-    localsuggestions_es: models.LocalsuggestionsEs
+    localsuggestions_es: models.LocalsuggestionsEs,
+    localphotos: models.Localphotos,
+    locals_info: models.LocalsInfo,
+    locals_info_es: models.LocalsInfoEs
   };
 
   return modelMap[table];

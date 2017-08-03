@@ -10,10 +10,6 @@ const app = module.exports = loopback();
 
 app.use(loopback.static(path.resolve('client/dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
-});
-
 app.post('/api/upload/proccessData/:sheet', multer().any(), (req, res) => {
   upload.proccessData(req, res, (err, result) => {
     console.error(err);
@@ -23,6 +19,16 @@ app.post('/api/upload/proccessData/:sheet', multer().any(), (req, res) => {
 });
 
 app.post('/api/upload/getSheets', multer().any(), upload.getSheets);
+
+
+app.use((req, res, next) => {
+  if (req.url.indexOf('/api') === -1
+      && req.url.indexOf('/explorer') === -1
+      && req.url.indexOf('/js') === -1) {
+    return res.sendFile(path.resolve('client/dist/index.html'));
+  }
+  return next();
+});
 
 app.use(loopback.static(path.resolve('client/dist')));
 

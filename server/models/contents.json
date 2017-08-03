@@ -402,6 +402,7 @@
     "created": {
       "type": "Date",
       "required": false,
+      "default": "$now",
       "length": null,
       "precision": null,
       "scale": null,

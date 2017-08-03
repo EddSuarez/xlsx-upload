@@ -7,8 +7,8 @@
     "pretest": "",
     "postinstall": "",
     "lb-service": "lb-ng server/server.js client/src/components/services/lb-services.js",
-    "build": "webpack --progress --colors --config config/webpack.prod.js",
-    "start": "npm run lb-service && npm run build && node server/server.js",
+    "build": "npm run lb-service && webpack --progress --colors --config config/webpack.prod.js",
+    "start": "node server/server.js",
     "start:dev": "npm run lb-service && PROXY_HOST=backend node config/webpack.dev.server.js",
     "start:dev:api": "nodemon --watch server server/server.js",
     "test:lint": "eslint . --ext .js  --ignore-path .gitignore --cache; exit 0"
